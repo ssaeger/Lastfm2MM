@@ -23,9 +23,6 @@ public class DataPanel extends JPanel {
 	 */
 	public DataPanel() {
 		this.setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -34,21 +31,11 @@ public class DataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("max(61dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("max(73dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
+				ColumnSpec.decode("max(61dlu;default)"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),
@@ -64,7 +51,7 @@ public class DataPanel extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		this.add(scrollPane, "2, 2, 23, 9, fill, fill");
+		this.add(scrollPane, "1, 2, 13, 9, fill, fill");
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -83,11 +70,11 @@ public class DataPanel extends JPanel {
 		});
 		
 		JButton btnSave = new JButton("Save");
-		this.add(btnSave, "16, 12");
-		this.add(btnDelete, "18, 12");
+		this.add(btnSave, "9, 12");
+		this.add(btnDelete, "11, 12");
 		
 		JButton btnDeleteAll = new JButton("Delete All");
-		this.add(btnDeleteAll, "20, 12");
+		this.add(btnDeleteAll, "13, 12");
 	}
 
 }
