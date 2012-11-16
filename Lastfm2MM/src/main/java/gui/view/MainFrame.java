@@ -1,4 +1,5 @@
-package gui;
+package gui.view;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -40,6 +41,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setTitle("Lastfm2MM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
