@@ -142,4 +142,24 @@ public class LastfmPanel extends JPanel {
 		add(btnSelectData, "5, 14");
 	}
 
+	public String getTxtUsername() {
+		return txtUsername.getText();
+	}
+
+	public String getTxtTotalPages() {
+		return txtTotalPages.getText();
+	}
+
+	public String getTxtPageLimit() {
+		return txtPageLimit.getText();
+	}
+
+	public String getTxtApiKey() {
+		return txtApiKey.getText();
+	}
+
+	public String getTexField() {
+		return texField.getText();
+	}
+
 }

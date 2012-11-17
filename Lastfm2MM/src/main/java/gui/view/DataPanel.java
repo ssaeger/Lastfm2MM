@@ -16,13 +16,13 @@ import com.jgoodies.forms.layout.RowSpec;
 
 public class DataPanel extends JPanel {
 
-	private JTable table;
+	private JTable lastfmTable;
 	private JScrollPane lastfmScrollPane;
 	private JButton btnDelete;
 	private JButton btnSave;
 	private JButton btnDeleteAll;
 	private JScrollPane mmScrollPane;
-	private JTable table_1;
+	private JTable mmTable;
 
 	/**
 	 * Create the panel.
@@ -54,24 +54,20 @@ public class DataPanel extends JPanel {
 		lastfmScrollPane = new JScrollPane();
 		this.add(lastfmScrollPane, "1, 2, 1, 9, fill, fill");
 
-		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
+		lastfmTable = new JTable();
+		lastfmTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
 				"Title", "Artist", "Album", "Playcount", "Last Played" }));
-		lastfmScrollPane.setViewportView(table);
+		lastfmScrollPane.setViewportView(lastfmTable);
 
 		btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		mmScrollPane = new JScrollPane();
 		this.add(mmScrollPane, "2, 2, 7, 9, fill, fill");
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
+		mmTable = new JTable();
+		mmTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
 				"Title", "Artist", "Album", "Playcount", "Last Played" }));
-		mmScrollPane.setViewportView(table_1);
+		mmScrollPane.setViewportView(mmTable);
 
 		btnSave = new JButton("Save");
 		this.add(btnSave, "4, 12");

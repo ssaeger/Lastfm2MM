@@ -49,4 +49,8 @@ public class ControlPanel extends JPanel {
 		this.add(btnReadData, "6, 4, left, center");
 	}
 
+	public int getSliderThreads() {
+		return sliderThreads.getValue();
+	}
+
 }
