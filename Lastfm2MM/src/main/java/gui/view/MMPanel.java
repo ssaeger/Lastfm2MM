@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 public class MMPanel extends JPanel {
 	private JTextField textField;
 	private JButton btnSelectDatabase;
+	private JLabel lblDatabase;
 
 	/**
 	 * Create the panel.
@@ -41,7 +42,7 @@ public class MMPanel extends JPanel {
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC, }));
 		
-		JLabel lblDatabase = new JLabel("Database:");
+		lblDatabase = new JLabel("Database:");
 		add(lblDatabase, "2, 4, right, default");
 
 		textField = new JTextField();
