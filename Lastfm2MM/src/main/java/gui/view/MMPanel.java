@@ -15,6 +15,7 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.JLabel;
 
 public class MMPanel extends JPanel {
 	private JTextField textField;
@@ -39,37 +40,15 @@ public class MMPanel extends JPanel {
 						FormFactory.DEFAULT_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC, }));
-
-		JRadioButton rdbtnNewData = new JRadioButton("New Data");
-		rdbtnNewData.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField.setEnabled(false);
-				btnSelectDatabase.setEnabled(false);
-			}
-		});
-		rdbtnNewData.setSelected(true);
-		add(rdbtnNewData, "2, 2");
-
-		JRadioButton rdbtnUpdateData = new JRadioButton("Update Data");
-		rdbtnUpdateData.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField.setEnabled(true);
-				btnSelectDatabase.setEnabled(true);
-			}
-		});
-		add(rdbtnUpdateData, "2, 4");
-
-		ButtonGroup btnGroup = new ButtonGroup();
-		btnGroup.add(rdbtnNewData);
-		btnGroup.add(rdbtnUpdateData);
+		
+		JLabel lblDatabase = new JLabel("Database:");
+		add(lblDatabase, "2, 4, right, default");
 
 		textField = new JTextField();
-		textField.setEnabled(false);
 		add(textField, "4, 4, fill, default");
 		textField.setColumns(10);
 
-		btnSelectDatabase = new JButton("Select Data");
-		btnSelectDatabase.setEnabled(false);
+		btnSelectDatabase = new JButton("Select Database");
 		btnSelectDatabase.setActionCommand("Select Data");
 		btnSelectDatabase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
