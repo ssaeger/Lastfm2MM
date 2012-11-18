@@ -6,18 +6,28 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
+import businesslogic.model.MMModel;
+import businesslogic.model.interfaces.IMMModelListener;
+
 import gui.view.MMPanel;
 
 public class MMPanelController {
 	private MMPanel mmPanel;
+	private MMModel mmModel;
 
-	public MMPanelController() {
-		this.mmPanel = new MMPanel();
+	public MMPanelController(MMPanel mmPanel) {
+		this.mmPanel = mmPanel;
+		this.mmModel = new MMModel(mmPanel.getTxtPath());
+		addMMModelListener(mmPanel);
 		addListener();
 	}
 
 	private void addListener() {
 		this.mmPanel.setSelectdatabaseListener(new SelectDatabaseListener());
+	}
+	
+	private void addMMModelListener(IMMModelListener mmModelListener) {
+		this.mmModel.addMMModelListener(mmModelListener);
 	}
 
 	class SelectDatabaseListener implements ActionListener {
@@ -28,7 +38,7 @@ public class MMPanelController {
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				mmPanel.setTxtPath(file.getAbsolutePath());
+				mmModel.setDatabase(file);
 			}
 		}
 	}

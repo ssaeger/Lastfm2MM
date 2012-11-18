@@ -11,13 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import businesslogic.model.interfaces.IMMModelListener;
+
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
 
-public class MMPanel extends JPanel {
+public class MMPanel extends JPanel implements IMMModelListener{
 	private JTextField txtPath;
 	private JButton btnSelectDatabase;
 	private JLabel lblDatabase;
@@ -51,18 +53,6 @@ public class MMPanel extends JPanel {
 
 		btnSelectDatabase = new JButton("Select Database");
 		btnSelectDatabase.setActionCommand("Select Data");
-//		btnSelectDatabase.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				JFileChooser fc = new JFileChooser();
-//				int returnVal = fc.showOpenDialog(MMPanel.this);
-//
-//				if (returnVal == JFileChooser.APPROVE_OPTION) {
-//					File file = fc.getSelectedFile();
-//					txtPath.setText(file.getAbsolutePath());
-//				}
-//			}
-//		});
 		add(btnSelectDatabase, "6, 4");
 
 	}
@@ -77,5 +67,10 @@ public class MMPanel extends JPanel {
 	
 	public void setSelectdatabaseListener(ActionListener aListener) {
 		this.btnSelectDatabase.addActionListener(aListener);
+	}
+
+	@Override
+	public void databasePathChanged(String newDatabasePath) {
+		txtPath.setText(newDatabasePath);
 	}
 }
