@@ -7,7 +7,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import businesslogic.model.MMModel;
-import businesslogic.model.interfaces.IMMModelListener;
+import businesslogic.model.interfaces.IMMListener;
 
 import gui.view.MMPanel;
 
@@ -26,7 +26,7 @@ public class MMPanelController {
 		this.mmPanel.setSelectdatabaseListener(new SelectDatabaseListener());
 	}
 	
-	private void addMMModelListener(IMMModelListener mmModelListener) {
+	private void addMMModelListener(IMMListener mmModelListener) {
 		this.mmModel.addMMModelListener(mmModelListener);
 	}
 

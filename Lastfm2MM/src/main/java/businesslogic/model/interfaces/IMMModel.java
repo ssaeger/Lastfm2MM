@@ -5,6 +5,6 @@ import java.io.File;
 public interface IMMModel {
 	 void setDatabase(File database);
 	 File getDatabase();
-	 void addMMModelListener(IMMModelListener mmModelListener);
-	 void removeMMModelListener(IMMModelListener mmModelListener);
+	 void addMMModelListener(IMMListener mmModelListener);
+	 void removeMMModelListener(IMMListener mmModelListener);
 }

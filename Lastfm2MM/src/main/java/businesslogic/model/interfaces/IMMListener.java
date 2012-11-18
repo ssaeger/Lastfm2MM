@@ -1,5 +1,5 @@
 package businesslogic.model.interfaces;
 
-public interface IMMModelListener {
+public interface IMMListener {
 	void databasePathChanged(String newDatabasePath);
 }

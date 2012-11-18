@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import businesslogic.model.interfaces.IMMModel;
-import businesslogic.model.interfaces.IMMModelListener;
+import businesslogic.model.interfaces.IMMListener;
 
 public class MMModel implements IMMModel {
 
 	private File database;
 
-	private List<IMMModelListener> listeners = new ArrayList<IMMModelListener>();
+	private List<IMMListener> listeners = new ArrayList<IMMListener>();
 
 	public MMModel(File database) {
 		setDatabase(database);
@@ -33,25 +33,25 @@ public class MMModel implements IMMModel {
 	@Override
 	public void setDatabase(File database) {
 		this.database = database;
-		for (IMMModelListener listener : listeners) {
+		for (IMMListener listener : listeners) {
 			listener.databasePathChanged(database.getAbsolutePath());
 		}
 	}
 
 	public void setDatabase(String path) {
 		this.database = new File(path);
-		for (IMMModelListener listener : listeners) {
+		for (IMMListener listener : listeners) {
 			listener.databasePathChanged(database.getAbsolutePath());
 		}
 	}
 
 	@Override
-	public void addMMModelListener(IMMModelListener mmModelListener) {
+	public void addMMModelListener(IMMListener mmModelListener) {
 		listeners.add(mmModelListener);
 	}
 
 	@Override
-	public void removeMMModelListener(IMMModelListener mmModelListener) {
+	public void removeMMModelListener(IMMListener mmModelListener) {
 		listeners.remove(mmModelListener);
 	}
 

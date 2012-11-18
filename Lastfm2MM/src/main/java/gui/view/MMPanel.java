@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import businesslogic.model.interfaces.IMMModelListener;
+import businesslogic.model.interfaces.IMMListener;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -19,7 +19,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
 
-public class MMPanel extends JPanel implements IMMModelListener{
+public class MMPanel extends JPanel implements IMMListener{
 	private JTextField txtPath;
 	private JButton btnSelectDatabase;
 	private JLabel lblDatabase;
