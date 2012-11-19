@@ -1,5 +1,7 @@
 package businesslogic.controller;
 
+import gui.view.MMPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,25 +11,23 @@ import javax.swing.JFileChooser;
 import businesslogic.model.MMModel;
 import businesslogic.model.interfaces.IMMListener;
 
-import gui.view.MMPanel;
-
 public class MMPanelController {
 	private MMPanel mmPanel;
 	private MMModel mmModel;
 
 	public MMPanelController(MMPanel mmPanel) {
 		this.mmPanel = mmPanel;
-		this.mmModel = new MMModel(mmPanel.getTxtPath());
-		addMMModelListener(mmPanel);
+		this.mmModel = new MMModel();
+		addMMListener(mmPanel);
 		addListener();
 	}
 
 	private void addListener() {
-		this.mmPanel.setSelectdatabaseListener(new SelectDatabaseListener());
+		this.mmPanel.setSelectDatabaseListener(new SelectDatabaseListener());
 	}
-	
-	private void addMMModelListener(IMMListener mmModelListener) {
-		this.mmModel.addMMModelListener(mmModelListener);
+
+	private void addMMListener(IMMListener mmListener) {
+		this.mmModel.addMMListener(mmListener);
 	}
 
 	class SelectDatabaseListener implements ActionListener {
@@ -42,5 +42,4 @@ public class MMPanelController {
 			}
 		}
 	}
-
 }

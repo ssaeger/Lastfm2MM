@@ -20,18 +20,14 @@ public class ControlPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ControlPanel() {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("57px"),
+		setLayout(new FormLayout(new ColumnSpec[] { ColumnSpec.decode("57px"),
 				ColumnSpec.decode("43px"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("83px"),},
-			new RowSpec[] {
-				FormFactory.LINE_GAP_ROWSPEC,
-				RowSpec.decode("45px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,}));
+				ColumnSpec.decode("83px"), }, new RowSpec[] {
+				FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("45px"),
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
 
 		lblThreads = new JLabel("Threads:");
 		add(lblThreads, "2, 2, left, center");

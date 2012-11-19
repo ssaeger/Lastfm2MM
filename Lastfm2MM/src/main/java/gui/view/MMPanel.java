@@ -1,14 +1,10 @@
 package gui.view;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import businesslogic.model.interfaces.IMMListener;
@@ -17,9 +13,8 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.JLabel;
 
-public class MMPanel extends JPanel implements IMMListener{
+public class MMPanel extends JPanel implements IMMListener {
 	private JTextField txtPath;
 	private JButton btnSelectDatabase;
 	private JLabel lblDatabase;
@@ -43,7 +38,7 @@ public class MMPanel extends JPanel implements IMMListener{
 						FormFactory.DEFAULT_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC, }));
-		
+
 		lblDatabase = new JLabel("Database:");
 		add(lblDatabase, "2, 4, right, default");
 
@@ -64,8 +59,8 @@ public class MMPanel extends JPanel implements IMMListener{
 	public void setTxtPath(String path) {
 		this.txtPath.setText(path);
 	}
-	
-	public void setSelectdatabaseListener(ActionListener aListener) {
+
+	public void setSelectDatabaseListener(ActionListener aListener) {
 		this.btnSelectDatabase.addActionListener(aListener);
 	}
 

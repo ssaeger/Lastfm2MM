@@ -3,8 +3,9 @@ package businesslogic.model.interfaces;
 import java.io.File;
 
 public interface IMMModel {
-	 void setDatabase(File database);
-	 File getDatabase();
-	 void addMMModelListener(IMMListener mmModelListener);
-	 void removeMMModelListener(IMMListener mmModelListener);
+	void setDatabase(File database);
+
+	void addMMListener(IMMListener mmListener);
+
+	void removeMMListener(IMMListener mmListener);
 }

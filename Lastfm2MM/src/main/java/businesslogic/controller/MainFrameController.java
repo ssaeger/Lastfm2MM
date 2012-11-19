@@ -1,21 +1,24 @@
 package businesslogic.controller;
 
 import gui.view.MainFrame;
+
 import javax.swing.UIManager;
 
 public class MainFrameController {
-	
+
 	private MainFrame mainFrame;
-	
+
 	public MainFrameController() {
 		showView();
-		MMPanelController mmPanelController = new MMPanelController(mainFrame.getMmPanel());
+		MMPanelController mmPanelController = new MMPanelController(
+				mainFrame.getMmPanel());
+		LastfmPanelController lastfmPanelController = new LastfmPanelController(
+				mainFrame.getLastfmPanel());
 	}
 
 	public void showView() {
 		try {
-			UIManager.setLookAndFeel(UIManager
-					.getSystemLookAndFeelClassName());
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			mainFrame = new MainFrame();
 			mainFrame.setVisible(true);
 		} catch (Exception e) {

@@ -1,8 +1,5 @@
 package gui.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,39 +28,36 @@ public class DataPanel extends JPanel {
 		this.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("max(280px;default):grow"),
 				ColumnSpec.decode("max(150px;min):grow"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("75px"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("75px"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("100px"),},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,}));
+				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("75px"),
+				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("75px"),
+				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("100px"), },
+				new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("default:grow"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC, }));
 
 		lastfmScrollPane = new JScrollPane();
 		this.add(lastfmScrollPane, "1, 2, 1, 9, fill, fill");
 
 		lastfmTable = new JTable();
-		lastfmTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
-				"Title", "Artist", "Album", "Playcount", "Last Played" }));
+		lastfmTable.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "Title", "Artist", "Album", "Playcount",
+						"Last Played" }));
 		lastfmScrollPane.setViewportView(lastfmTable);
 
 		btnDelete = new JButton("Delete");
-		
+
 		mmScrollPane = new JScrollPane();
 		this.add(mmScrollPane, "2, 2, 7, 9, fill, fill");
-		
+
 		mmTable = new JTable();
 		mmTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
 				"Title", "Artist", "Album", "Playcount", "Last Played" }));

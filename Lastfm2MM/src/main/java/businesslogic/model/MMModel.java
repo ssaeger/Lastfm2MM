@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import businesslogic.model.interfaces.IMMModel;
 import businesslogic.model.interfaces.IMMListener;
+import businesslogic.model.interfaces.IMMModel;
 
 public class MMModel implements IMMModel {
 
@@ -13,46 +13,38 @@ public class MMModel implements IMMModel {
 
 	private List<IMMListener> listeners = new ArrayList<IMMListener>();
 
-	public MMModel(File database) {
-		setDatabase(database);
-	}
-
-	public MMModel(String databasePath) {
-		setDatabase(databasePath);
-	}
-
-	@Override
-	public File getDatabase() {
-		return database;
-	}
-
-	public String getDatabasePath() {
-		return database.getAbsolutePath();
+	public MMModel() {
+		// initialize dummy data to avoid nullpointers at the first comparison
+		database = new File("");
 	}
 
 	@Override
 	public void setDatabase(File database) {
-		this.database = database;
-		for (IMMListener listener : listeners) {
-			listener.databasePathChanged(database.getAbsolutePath());
+		if (!this.database.getAbsolutePath().equals(database.getAbsolutePath())) {
+			this.database = database;
+			for (IMMListener listener : listeners) {
+				listener.databasePathChanged(database.getAbsolutePath());
+			}
 		}
 	}
 
 	public void setDatabase(String path) {
-		this.database = new File(path);
-		for (IMMListener listener : listeners) {
-			listener.databasePathChanged(database.getAbsolutePath());
+		if (!this.database.getAbsolutePath().equals(path)) {
+			this.database = new File(path);
+			for (IMMListener listener : listeners) {
+				listener.databasePathChanged(database.getAbsolutePath());
+			}
 		}
 	}
 
 	@Override
-	public void addMMModelListener(IMMListener mmModelListener) {
-		listeners.add(mmModelListener);
+	public void addMMListener(IMMListener mmListener) {
+		listeners.add(mmListener);
 	}
 
 	@Override
-	public void removeMMModelListener(IMMListener mmModelListener) {
-		listeners.remove(mmModelListener);
+	public void removeMMListener(IMMListener mmListener) {
+		listeners.remove(mmListener);
 	}
 
 }
