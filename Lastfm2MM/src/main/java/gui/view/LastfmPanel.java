@@ -2,29 +2,30 @@ package gui.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentListener;
+
+import businesslogic.model.interfaces.ILastfmListener;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class LastfmPanel extends JPanel {
+public class LastfmPanel extends JPanel implements ILastfmListener {
 
 	private JTextField txtUsername;
 	private JTextField txtTotalPages;
 	private JTextField txtPageLimit;
 	private JTextField txtApiKey;
-	private JTextField texField;
+	private JTextField txtDataPath;
 	private JButton btnSelectData;
 	private JLabel lblPageLimit;
 	private JLabel lblApiKey;
@@ -101,7 +102,7 @@ public class LastfmPanel extends JPanel {
 		rdbtnNewData = new JRadioButton("New Data");
 		rdbtnNewData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				texField.setEnabled(false);
+				txtDataPath.setEnabled(false);
 				btnSelectData.setEnabled(false);
 			}
 		});
@@ -112,7 +113,7 @@ public class LastfmPanel extends JPanel {
 		rdbtnUpdateData = new JRadioButton("Update Data");
 		rdbtnUpdateData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				texField.setEnabled(true);
+				txtDataPath.setEnabled(true);
 				btnSelectData.setEnabled(true);
 			}
 		});
@@ -122,44 +123,85 @@ public class LastfmPanel extends JPanel {
 		btnSelectData = new JButton("Select Data");
 		btnSelectData.setEnabled(false);
 		btnSelectData.setActionCommand("Select Data");
-		btnSelectData.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
-				JFileChooser fc = new JFileChooser();
-				int returnVal = fc.showOpenDialog(LastfmPanel.this);
-
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File file = fc.getSelectedFile();
-					texField.setText(file.getAbsolutePath());
-				}
-			}
-		});
-
-		texField = new JTextField();
-		texField.setEnabled(false);
-		add(texField, "2, 12, 4, 1, fill, default");
-		texField.setColumns(10);
+		txtDataPath = new JTextField();
+		txtDataPath.setEnabled(false);
+		add(txtDataPath, "2, 12, 4, 1, fill, default");
+		txtDataPath.setColumns(10);
 		add(btnSelectData, "5, 14");
 	}
 
-	public String getTxtUsername() {
+	public void setSelectDataListener(ActionListener aListener) {
+		this.btnSelectData.addActionListener(aListener);
+	}
+
+	// public void setUsernameListener(ActionListener aListener) {
+	// this.txtUsername.addActionListener(aListener);
+	// }
+
+	public void setUsernameListener(DocumentListener aListener) {
+		this.txtUsername.getDocument().addDocumentListener(aListener);
+	}
+
+	public void setTotalPagesListener(ActionListener aListener) {
+		this.txtTotalPages.addActionListener(aListener);
+	}
+
+	public void setPageLimitListener(ActionListener aListener) {
+		this.txtPageLimit.addActionListener(aListener);
+	}
+
+	public void setApiKeyListener(ActionListener aListener) {
+		this.txtApiKey.addActionListener(aListener);
+	}
+
+	public void setDataPathListener(ActionListener aListener) {
+		this.txtDataPath.addActionListener(aListener);
+	}
+
+	public String getUsernameString() {
 		return txtUsername.getText();
 	}
 
-	public String getTxtTotalPages() {
+	public String getTotalPagesString() {
 		return txtTotalPages.getText();
 	}
 
-	public String getTxtPageLimit() {
+	public String getPageLimitString() {
 		return txtPageLimit.getText();
 	}
 
-	public String getTxtApiKey() {
+	public String getApiKeyString() {
 		return txtApiKey.getText();
 	}
 
-	public String getTexField() {
-		return texField.getText();
+	public String getDataPathString() {
+		return txtDataPath.getText();
+	}
+
+	@Override
+	public void dataPathChanged(String newDataPath) {
+		txtDataPath.setText(newDataPath);
+	}
+
+	@Override
+	public void usernameChanged(String newUsername) {
+		txtUsername.setText(newUsername);
+	}
+
+	@Override
+	public void totalPagesChanged(String newTotalPages) {
+		txtTotalPages.setText(newTotalPages);
+	}
+
+	@Override
+	public void pageLimitChanged(String newPagelimit) {
+		txtPageLimit.setText(newPagelimit);
+	}
+
+	@Override
+	public void apiKeyChanged(String newApiKey) {
+		txtApiKey.setText(newApiKey);
 	}
 
 }
