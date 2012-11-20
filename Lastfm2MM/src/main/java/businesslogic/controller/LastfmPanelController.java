@@ -4,6 +4,8 @@ import gui.view.LastfmPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -60,39 +62,19 @@ public class LastfmPanelController {
 		}
 	}
 
-	class SetUsernameListener implements DocumentListener {
+	class SetUsernameListener implements FocusListener {
+
 		@Override
-		public void changedUpdate(DocumentEvent e) {
-			try {
-				lastfmModel.setUsernameNoUpdate(e.getDocument().getText(0,
-						e.getDocument().getLength()));
-			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 
 		@Override
-		public void insertUpdate(DocumentEvent e) {
-			try {
-				lastfmModel.setUsernameNoUpdate(e.getDocument().getText(0,
-						e.getDocument().getLength()));
-			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		public void focusLost(FocusEvent e) {
+			lastfmModel.setUsername(lastfmPanel.getUsernameString());			
 		}
-
-		@Override
-		public void removeUpdate(DocumentEvent e) {
-			try {
-				lastfmModel.setUsernameNoUpdate(e.getDocument().getText(0,
-						e.getDocument().getLength()));
-			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
+		
 	}
 
 	class SetTotalPagesListener implements ActionListener {
