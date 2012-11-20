@@ -140,20 +140,20 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		this.txtUsername.addFocusListener(fListener);
 	}
 
-	public void setTotalPagesListener(ActionListener aListener) {
-		this.txtTotalPages.addActionListener(aListener);
+	public void setTotalPagesListener(FocusListener fListener) {
+		this.txtTotalPages.addFocusListener(fListener);
 	}
 
-	public void setPageLimitListener(ActionListener aListener) {
-		this.txtPageLimit.addActionListener(aListener);
+	public void setPageLimitListener(FocusListener fListener) {
+		this.txtPageLimit.addFocusListener(fListener);
 	}
 
-	public void setApiKeyListener(ActionListener aListener) {
-		this.txtApiKey.addActionListener(aListener);
+	public void setApiKeyListener(FocusListener fListener) {
+		this.txtApiKey.addFocusListener(fListener);
 	}
 
-	public void setDataPathListener(ActionListener aListener) {
-		this.txtDataPath.addActionListener(aListener);
+	public void setDataPathListener(FocusListener fListener) {
+		this.txtDataPath.addFocusListener(fListener);
 	}
 
 	public String getUsernameString() {

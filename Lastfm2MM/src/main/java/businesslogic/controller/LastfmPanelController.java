@@ -66,38 +66,70 @@ public class LastfmPanelController {
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
-			
+			// do nothing
 		}
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			lastfmModel.setUsername(lastfmPanel.getUsernameString());			
+			lastfmModel.setUsername(lastfmPanel.getUsernameString());
 		}
-		
+
 	}
 
-	class SetTotalPagesListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+	class SetTotalPagesListener implements FocusListener {
 
+		@Override
+		public void focusGained(FocusEvent e) {
+			// do nothing
 		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			lastfmModel.setTotalPages(lastfmPanel.getTotalPagesString());
+		}
+
 	}
 
-	class SetPageLimitListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+	class SetPageLimitListener implements FocusListener {
 
+		@Override
+		public void focusGained(FocusEvent e) {
+			// do nothing
 		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			lastfmModel.setPageLimit(Integer.parseInt(lastfmPanel
+					.getPageLimitString()));
+		}
+
 	}
 
-	class SetApiKeyListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+	class SetApiKeyListener implements FocusListener {
 
+		@Override
+		public void focusGained(FocusEvent e) {
+			// do nothing
 		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			lastfmModel.setApiKey(lastfmPanel.getApiKeyString());
+		}
+
 	}
 
-	class SetDataPathListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+	class SetDataPathListener implements FocusListener {
 
+		@Override
+		public void focusGained(FocusEvent e) {
+			// do nothing
 		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			lastfmModel.setData(new File(lastfmPanel.getDataPathString()));
+		}
+
 	}
 }

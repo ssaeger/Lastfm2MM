@@ -62,6 +62,7 @@ public class LastfmModel implements ILastfmModel {
 	public void setTotalPages(String totalPages) {
 		if (totalPages.equals("all"))
 			setTotalPages(0);
+		else setTotalPages(Integer.parseInt(totalPages));
 	}
 
 	public int getPageLimit() {
