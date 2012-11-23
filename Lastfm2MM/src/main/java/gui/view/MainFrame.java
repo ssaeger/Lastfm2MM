@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
 	private LastfmPanel lastfmPanel;
 	private MMPanel mmPanel;
 	private DataPanel dataPanel;
-	private JPanel statusPanel;
+	static private StatusPanel statusPanel;
 	private ControlPanel controlPanel;
 
 	/**
@@ -66,7 +66,7 @@ public class MainFrame extends JFrame {
 		dataPanel = new DataPanel();
 		contentPane.add(dataPanel, "4, 4, 3, 1, fill, fill");
 
-		statusPanel = new JPanel();
+		statusPanel = new StatusPanel();
 		contentPane.add(statusPanel, "4, 8, fill, fill");
 
 		controlPanel = new ControlPanel();
@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame(LastfmPanel lastfmPanel, MMPanel mmPanel,
-			DataPanel dataPanel, JPanel statusPanel, ControlPanel controlPanel)
+			DataPanel dataPanel, StatusPanel statusPanel, ControlPanel controlPanel)
 			throws HeadlessException {
 		setTitle("Lastfm2MM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,7 +120,7 @@ public class MainFrame extends JFrame {
 		return dataPanel;
 	}
 
-	public JPanel getStatusPanel() {
+	public StatusPanel getStatusPanel() {
 		return statusPanel;
 	}
 
@@ -144,5 +144,9 @@ public class MainFrame extends JFrame {
 		contentPane.add(statusPanel, "4, 8, fill, fill");
 
 		contentPane.add(controlPanel, "6, 8, fill, fill");
+	}
+	
+	public static void updateStatus(String newStatus) {
+		statusPanel.appendStatus(newStatus);
 	}
 }

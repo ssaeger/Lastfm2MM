@@ -1,6 +1,7 @@
 package businesslogic.controller;
 
 import gui.view.LastfmPanel;
+import gui.view.MainFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +10,6 @@ import java.awt.event.FocusListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 
 import businesslogic.model.LastfmModel;
 import businesslogic.model.interfaces.ILastfmListener;

@@ -1,6 +1,7 @@
 package businesslogic.controller;
 
 import gui.view.MainFrame;
+import gui.view.StatusPanel;
 
 import javax.swing.UIManager;
 

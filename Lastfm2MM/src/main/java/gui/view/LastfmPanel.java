@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentListener;
 
 import businesslogic.model.interfaces.ILastfmListener;
 
