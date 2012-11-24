@@ -44,6 +44,25 @@ public class DataPanel extends JPanel {
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC, }));
 
+		createLastfmTable();
+		createMMTable();
+		addButtons();
+
+	}
+
+	private void addButtons() {
+
+		btnDelete = new JButton("Delete");
+		btnSave = new JButton("Save");
+		btnDeleteAll = new JButton("Delete All");
+
+		this.add(btnSave, "4, 12");
+		this.add(btnDelete, "6, 12");
+		this.add(btnDeleteAll, "8, 12");
+
+	}
+
+	private void createLastfmTable() {
 		lastfmScrollPane = new JScrollPane();
 		this.add(lastfmScrollPane, "1, 2, 1, 9, fill, fill");
 
@@ -52,9 +71,9 @@ public class DataPanel extends JPanel {
 				new String[] { "Title", "Artist", "Album", "Playcount",
 						"Last Played" }));
 		lastfmScrollPane.setViewportView(lastfmTable);
+	}
 
-		btnDelete = new JButton("Delete");
-
+	private void createMMTable() {
 		mmScrollPane = new JScrollPane();
 		this.add(mmScrollPane, "2, 2, 7, 9, fill, fill");
 
@@ -62,13 +81,6 @@ public class DataPanel extends JPanel {
 		mmTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
 				"Title", "Artist", "Album", "Playcount", "Last Played" }));
 		mmScrollPane.setViewportView(mmTable);
-
-		btnSave = new JButton("Save");
-		this.add(btnSave, "4, 12");
-		this.add(btnDelete, "6, 12");
-
-		btnDeleteAll = new JButton("Delete All");
-		this.add(btnDeleteAll, "8, 12");
 	}
 
 }
