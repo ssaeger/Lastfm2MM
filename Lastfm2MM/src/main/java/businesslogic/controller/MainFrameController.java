@@ -21,7 +21,7 @@ public class MainFrameController {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			mainFrame = new MainFrame();
-			mainFrame.setVisible(true);
+			mainFrame.getFrame().setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
