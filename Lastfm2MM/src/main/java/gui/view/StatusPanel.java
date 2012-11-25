@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import javax.swing.JPanel;
 import javax.swing.BoxLayout;
-import javax.swing.JTextPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
+import javax.swing.JTextPane;
 
 public class StatusPanel extends JPanel {
 

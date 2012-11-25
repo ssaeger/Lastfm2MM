@@ -1,20 +1,26 @@
 package gui.view;
 
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import businesslogic.model.interfaces.IMMListener;
+import businesslogic.controller.MMPanelController;
+import businesslogic.model.MMModel;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class MMPanel extends JPanel implements IMMListener {
+public class MMPanel extends JPanel implements Observer {
+	private MMModel model;
+	private MMPanelController controller;
+
 	private JTextField txtPath;
 	private JButton btnSelectDatabase;
 	private JLabel lblDatabase;
@@ -22,7 +28,11 @@ public class MMPanel extends JPanel implements IMMListener {
 	/**
 	 * Create the panel.
 	 */
-	public MMPanel() {
+	public MMPanel(MMModel mmModel) {
+		this.model = mmModel;
+		model.addObserver(this);
+		controller = new MMPanelController(model);
+
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC,
 						ColumnSpec.decode("max(44dlu;default)"),
@@ -47,7 +57,7 @@ public class MMPanel extends JPanel implements IMMListener {
 		txtPath.setColumns(10);
 
 		btnSelectDatabase = new JButton("Select Database");
-		btnSelectDatabase.setActionCommand("Select Data");
+		btnSelectDatabase.addActionListener(controller);
 		add(btnSelectDatabase, "6, 4");
 
 	}
@@ -65,7 +75,12 @@ public class MMPanel extends JPanel implements IMMListener {
 	}
 
 	@Override
-	public void databasePathChanged(String newDatabasePath) {
-		txtPath.setText(newDatabasePath);
+	public void update(Observable o, Object arg) {
+		if (model == o) {
+			if (arg.equals("setDatabase")) {
+				txtPath.setText(model.getDatabasePath());
+			}
+		}
+
 	}
 }

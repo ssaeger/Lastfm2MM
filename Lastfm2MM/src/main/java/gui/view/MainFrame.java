@@ -21,37 +21,37 @@ public class MainFrame {
 	private LastfmPanel lastfmPanel;
 	private MMPanel mmPanel;
 	private DataPanel dataPanel;
-	static private StatusPanel statusPanel;
+	private StatusPanel statusPanel;
 	private ControlPanel controlPanel;
 
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() {
-		
+	public MainFrame(MMPanel mmPanel, LastfmPanel lastfmPanel) {
+
 		createJFrame();
 
-		lastfmPanel = new LastfmPanel();
-		mmPanel = new MMPanel();
+		this.lastfmPanel = lastfmPanel;
+		this.mmPanel = mmPanel;
 		dataPanel = new DataPanel();
 		statusPanel = new StatusPanel();
 		controlPanel = new ControlPanel();
-		
+
 		insertPanels();
 	}
 
 	public MainFrame(LastfmPanel lastfmPanel, MMPanel mmPanel,
-			DataPanel dataPanel, StatusPanel statusPanel, ControlPanel controlPanel)
-			throws HeadlessException {
-		
+			DataPanel dataPanel, StatusPanel statusPanel,
+			ControlPanel controlPanel) throws HeadlessException {
+
 		createJFrame();
-		
+
 		this.lastfmPanel = lastfmPanel;
 		this.mmPanel = mmPanel;
 		this.dataPanel = dataPanel;
 		this.statusPanel = statusPanel;
 		this.controlPanel = controlPanel;
-		
+
 		insertPanels();
 	}
 
@@ -74,7 +74,7 @@ public class MainFrame {
 	public ControlPanel getControlPanel() {
 		return controlPanel;
 	}
-	
+
 	public JFrame getFrame() {
 		return jFrame;
 	}
@@ -105,9 +105,9 @@ public class MainFrame {
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC, }));
 	}
-	
+
 	private void insertPanels() {
-		
+
 		lastfmPanel.setBorder(new TitledBorder(new LineBorder(
 				new Color(0, 0, 0)), "Last.fm Settings", TitledBorder.LEFT,
 				TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -123,9 +123,5 @@ public class MainFrame {
 		contentPane.add(statusPanel, "4, 8, fill, fill");
 
 		contentPane.add(controlPanel, "6, 8, fill, fill");
-	}
-	
-	public static void updateStatus(String newStatus) {
-		statusPanel.appendStatus(newStatus);
 	}
 }

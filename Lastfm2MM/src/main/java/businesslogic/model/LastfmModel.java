@@ -1,21 +1,15 @@
 package businesslogic.model;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Observable;
 
-import businesslogic.model.interfaces.ILastfmListener;
-import businesslogic.model.interfaces.ILastfmModel;
-
-public class LastfmModel implements ILastfmModel {
+public class LastfmModel extends Observable {
 	public static final int PAGELIMIT = 200;
 	private String username;
 	private int totalPages;
 	private int pageLimit;
 	private File data;
 	private String apiKey;
-
-	private List<ILastfmListener> listeners = new ArrayList<ILastfmListener>();
 
 	public LastfmModel() {
 		// initialize dummy data to avoid nullpointers at the first comparison
@@ -30,93 +24,64 @@ public class LastfmModel implements ILastfmModel {
 		return username;
 	}
 
-	@Override
 	public void setUsername(String username) {
-		if (!this.username.equals(username)) {
-			this.username = username;
-			for (ILastfmListener listener : listeners) {
-				listener.usernameChanged(username);
-			}
-		}
-	}
-
-	public void setUsernameNoUpdate(String username) {
 		this.username = username;
+		this.setChanged();
+		this.notifyObservers("setUsername");
 	}
 
 	public int getTotalPages() {
 		return totalPages;
 	}
 
-	@Override
 	public void setTotalPages(int totalPages) {
-		if (this.totalPages != totalPages) {
-			this.totalPages = totalPages;
-			for (ILastfmListener listener : listeners) {
-				listener.totalPagesChanged(Integer.toString(totalPages));
-			}
-		}
+		this.totalPages = totalPages;
+		this.setChanged();
+		this.notifyObservers("setTotalPages");
 	}
 
-	@Override
 	public void setTotalPages(String totalPages) {
 		if (totalPages.equals("all"))
 			setTotalPages(0);
-		else setTotalPages(Integer.parseInt(totalPages));
+		else
+			setTotalPages(Integer.parseInt(totalPages));
 	}
 
 	public int getPageLimit() {
 		return pageLimit;
 	}
 
-	@Override
 	public void setPageLimit(int pageLimit) {
-		if (this.pageLimit != pageLimit) {
-			this.pageLimit = pageLimit;
-			if (pageLimit > LastfmModel.PAGELIMIT)
-				this.pageLimit = LastfmModel.PAGELIMIT;
-			for (ILastfmListener listener : listeners) {
-				listener.pageLimitChanged(Integer.toString(pageLimit));
-			}
-		}
+		this.pageLimit = pageLimit;
+		if (pageLimit > LastfmModel.PAGELIMIT)
+			this.pageLimit = LastfmModel.PAGELIMIT;
+		this.setChanged();
+		this.notifyObservers("setPageLimit");
+
 	}
 
 	public File getData() {
 		return data;
 	}
 
-	@Override
+	public String getDataPath() {
+		return data.getAbsolutePath();
+	}
+
 	public void setData(File data) {
-		if (!this.data.getAbsolutePath().equals(data.getAbsolutePath())) {
-			this.data = data;
-			for (ILastfmListener listener : listeners) {
-				listener.dataPathChanged(data.getAbsolutePath());
-			}
-		}
+		this.data = data;
+		this.setChanged();
+		this.notifyObservers("setData");
+
 	}
 
 	public String getApiKey() {
 		return apiKey;
 	}
 
-	@Override
 	public void setApiKey(String apiKey) {
-		if (!this.apiKey.equals(apiKey)) {
-			this.apiKey = apiKey;
-			for (ILastfmListener listener : listeners) {
-				listener.apiKeyChanged(apiKey);
-			}
-		}
+		this.apiKey = apiKey;
+		this.setChanged();
+		this.notifyObservers("setApiKey");
 	}
-
-	@Override
-	public void addLastfmListener(ILastfmListener lastfmListener) {
-		listeners.add(lastfmListener);
-	}
-
-	@Override
-	public void removeLastfmListener(ILastfmListener lastfmListener) {
-		listeners.remove(lastfmListener);
-	}
-
 }

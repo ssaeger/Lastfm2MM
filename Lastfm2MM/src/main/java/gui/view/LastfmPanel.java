@@ -2,7 +2,8 @@ package gui.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,14 +13,18 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import businesslogic.model.interfaces.ILastfmListener;
+import businesslogic.controller.LastfmPanelController;
+import businesslogic.model.LastfmModel;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class LastfmPanel extends JPanel implements ILastfmListener {
+public class LastfmPanel extends JPanel implements Observer {
+
+	private LastfmModel model;
+	private LastfmPanelController controller;
 
 	private JTextField txtUsername;
 	private JTextField txtTotalPages;
@@ -39,7 +44,10 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 	/**
 	 * Create the this.
 	 */
-	public LastfmPanel() {
+	public LastfmPanel(LastfmModel model) {
+		this.model = model;
+		model.addObserver(this);
+		controller = new LastfmPanelController(model);
 
 		this.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
@@ -61,8 +69,10 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		this.add(lblUsername, "2, 2, right, default");
 
 		txtUsername = new JTextField();
+		txtUsername.setName("username");
 		txtUsername.setText("zaega");
 		txtUsername.setHorizontalAlignment(SwingConstants.CENTER);
+		txtUsername.addFocusListener(controller);
 		this.add(txtUsername, "4, 2, left, default");
 		txtUsername.setColumns(10);
 
@@ -74,8 +84,10 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		this.add(lblTotalPages, "2, 4, right, default");
 
 		txtTotalPages = new JTextField();
+		txtTotalPages.setName("totalPages");
 		txtTotalPages.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTotalPages.setText("all");
+		txtTotalPages.addFocusListener(controller);
 		this.add(txtTotalPages, "4, 4, left, default");
 		txtTotalPages.setColumns(10);
 
@@ -83,8 +95,10 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		this.add(lblPageLimit, "2, 6, right, default");
 
 		txtPageLimit = new JTextField();
+		txtPageLimit.setName("pageLimit");
 		txtPageLimit.setText("200");
 		txtPageLimit.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPageLimit.addFocusListener(controller);
 		this.add(txtPageLimit, "4, 6, left, default");
 		txtPageLimit.setColumns(10);
 
@@ -92,8 +106,10 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		this.add(lblApiKey, "2, 8, right, default");
 
 		txtApiKey = new JTextField();
+		txtApiKey.setName("apiKey");
 		txtApiKey.setText("30d3d4877f08d37cdbba1a8ac3ebf982");
 		txtApiKey.setHorizontalAlignment(SwingConstants.CENTER);
+		txtApiKey.addFocusListener(controller);
 		this.add(txtApiKey, "4, 8, 2, 1");
 		txtApiKey.setColumns(10);
 
@@ -121,38 +137,26 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		btnGroup.add(rdbtnUpdateData);
 
 		btnSelectData = new JButton("Select Data");
+		btnSelectData.setName("selectData");
 		btnSelectData.setEnabled(false);
-		btnSelectData.setActionCommand("Select Data");
+		btnSelectData.addActionListener(controller);
+		this.add(btnSelectData, "5, 14");
 
 		txtDataPath = new JTextField();
+		txtDataPath.setName("dataPath");
 		txtDataPath.setEnabled(false);
-		add(txtDataPath, "2, 12, 4, 1, fill, default");
+		txtDataPath.addFocusListener(controller);
+		this.add(txtDataPath, "2, 12, 4, 1, fill, default");
 		txtDataPath.setColumns(10);
-		add(btnSelectData, "5, 14");
-	}
 
-	public void setSelectDataListener(ActionListener aListener) {
-		this.btnSelectData.addActionListener(aListener);
+		initModel();
 	}
-
-	public void setUsernameListener(FocusListener fListener) {
-		this.txtUsername.addFocusListener(fListener);
-	}
-
-	public void setTotalPagesListener(FocusListener fListener) {
-		this.txtTotalPages.addFocusListener(fListener);
-	}
-
-	public void setPageLimitListener(FocusListener fListener) {
-		this.txtPageLimit.addFocusListener(fListener);
-	}
-
-	public void setApiKeyListener(FocusListener fListener) {
-		this.txtApiKey.addFocusListener(fListener);
-	}
-
-	public void setDataPathListener(FocusListener fListener) {
-		this.txtDataPath.addFocusListener(fListener);
+	
+	private void initModel() {
+		model.setUsername(getUsernameString());
+		model.setTotalPages(getTotalPagesString());
+		model.setPageLimit(Integer.parseInt(getPageLimitString()));
+		model.setApiKey(getApiKeyString());
 	}
 
 	public String getUsernameString() {
@@ -175,29 +179,40 @@ public class LastfmPanel extends JPanel implements ILastfmListener {
 		return txtDataPath.getText();
 	}
 
-	@Override
 	public void dataPathChanged(String newDataPath) {
 		txtDataPath.setText(newDataPath);
 	}
 
-	@Override
 	public void usernameChanged(String newUsername) {
 		txtUsername.setText(newUsername);
 	}
 
-	@Override
 	public void totalPagesChanged(String newTotalPages) {
 		txtTotalPages.setText(newTotalPages);
 	}
 
-	@Override
 	public void pageLimitChanged(String newPagelimit) {
 		txtPageLimit.setText(newPagelimit);
 	}
 
-	@Override
 	public void apiKeyChanged(String newApiKey) {
 		txtApiKey.setText(newApiKey);
 	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		if (model == o) {
+			if (arg.equals("setUsername")) {
+				txtUsername.setText(model.getUsername());
+			} else if (arg.equals("setTotalPages")) {
+				txtTotalPages.setText(String.valueOf(model.getTotalPages()));
+			} else if (arg.equals("setPageLimit")) {
+				txtPageLimit.setText(String.valueOf(model.getPageLimit()));
+			} else if (arg.equals("setData")) {
+				txtDataPath.setText(model.getDataPath());
+			} else if (arg.equals("setApiKey")) {
+				txtApiKey.setText(model.getApiKey());
+			}
+		}
+	}
 }

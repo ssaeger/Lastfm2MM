@@ -1,8 +1,8 @@
 package businesslogic.controller;
 
 import gui.view.LastfmPanel;
-import gui.view.MainFrame;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -12,46 +12,28 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import businesslogic.model.LastfmModel;
-import businesslogic.model.interfaces.ILastfmListener;
 
-public class LastfmPanelController {
-	private LastfmPanel lastfmPanel;
+public class LastfmPanelController implements ActionListener, FocusListener {
+
 	private LastfmModel lastfmModel;
 
-	public LastfmPanelController(LastfmPanel lastfmPanel) {
-		this.lastfmPanel = lastfmPanel;
-		this.lastfmModel = new LastfmModel();
-		addLastfmListener(lastfmPanel);
-		updateModel();
-		addListener();
+	public LastfmPanelController(LastfmModel lastfmModel) {
+		this.lastfmModel = lastfmModel;
+		// updateModel();
 	}
 
-	private void updateModel() {
-		this.lastfmModel.setUsername(lastfmPanel.getUsernameString());
-		this.lastfmModel.setTotalPages(lastfmPanel.getTotalPagesString());
-		this.lastfmModel.setPageLimit(Integer.parseInt(lastfmPanel
-				.getPageLimitString()));
-		this.lastfmModel.setApiKey(lastfmPanel.getApiKeyString());
-	}
+//	 private void updateModel() {
+//	 this.lastfmModel.setUsername(lastfmPanel.getUsernameString());
+//	 this.lastfmModel.setTotalPages(lastfmPanel.getTotalPagesString());
+//	 this.lastfmModel.setPageLimit(Integer.parseInt(lastfmPanel
+//	 .getPageLimitString()));
+//	 this.lastfmModel.setApiKey(lastfmPanel.getApiKeyString());
+//	 }
 
-	private void addListener() {
-		this.lastfmPanel.setSelectDataListener(new SelectDataListener());
-		this.lastfmPanel.setUsernameListener(new SetUsernameListener());
-		this.lastfmPanel.setPageLimitListener(new SetPageLimitListener());
-		this.lastfmPanel.setTotalPagesListener(new SetTotalPagesListener());
-		this.lastfmPanel.setApiKeyListener(new SetApiKeyListener());
-		this.lastfmPanel.setDataPathListener(new SetDataPathListener());
-	}
-
-	private void addLastfmListener(ILastfmListener lastfmListener) {
-		this.lastfmModel.addLastfmListener(lastfmListener);
-	}
-
-	class SelectDataListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Select Data")) {
 			JFileChooser fc = new JFileChooser();
-			int returnVal = fc.showOpenDialog(lastfmPanel);
+			int returnVal = fc.showOpenDialog((Component) e.getSource());
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
@@ -60,74 +42,39 @@ public class LastfmPanelController {
 		}
 	}
 
-	class SetUsernameListener implements FocusListener {
+	@Override
+	public void focusGained(FocusEvent e) {
+		// do nothing
+	}
 
-		@Override
-		public void focusGained(FocusEvent e) {
-			// do nothing
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			lastfmModel.setUsername(lastfmPanel.getUsernameString());
+	@Override
+	public void focusLost(FocusEvent e) {
+		switch (e.getComponent().getName()) {
+		case "username":
+			lastfmModel
+					.setUsername(((LastfmPanel) e.getComponent().getParent())
+							.getUsernameString());
+			break;
+		case "totalPages":
+			lastfmModel.setTotalPages(((LastfmPanel) e.getComponent()
+					.getParent()).getTotalPagesString());
+			break;
+		case "pageLimit":
+			lastfmModel.setPageLimit(Integer.parseInt(((LastfmPanel) e
+					.getComponent().getParent()).getPageLimitString()));
+			break;
+		case "apiKey":
+			lastfmModel.setApiKey(((LastfmPanel) e.getComponent().getParent())
+					.getApiKeyString());
+			break;
+		case "dataPath":
+			lastfmModel.setData(new File(((LastfmPanel) e.getComponent()
+					.getParent()).getDataPathString()));
+			break;
+		default:
+			break;
 		}
 
 	}
 
-	class SetTotalPagesListener implements FocusListener {
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			// do nothing
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			lastfmModel.setTotalPages(lastfmPanel.getTotalPagesString());
-		}
-
-	}
-
-	class SetPageLimitListener implements FocusListener {
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			// do nothing
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			lastfmModel.setPageLimit(Integer.parseInt(lastfmPanel
-					.getPageLimitString()));
-		}
-
-	}
-
-	class SetApiKeyListener implements FocusListener {
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			// do nothing
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			lastfmModel.setApiKey(lastfmPanel.getApiKeyString());
-		}
-
-	}
-
-	class SetDataPathListener implements FocusListener {
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			// do nothing
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			lastfmModel.setData(new File(lastfmPanel.getDataPathString()));
-		}
-
-	}
 }
