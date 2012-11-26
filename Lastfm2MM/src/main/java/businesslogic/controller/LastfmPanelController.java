@@ -19,16 +19,7 @@ public class LastfmPanelController implements ActionListener, FocusListener {
 
 	public LastfmPanelController(LastfmModel lastfmModel) {
 		this.lastfmModel = lastfmModel;
-		// updateModel();
 	}
-
-//	 private void updateModel() {
-//	 this.lastfmModel.setUsername(lastfmPanel.getUsernameString());
-//	 this.lastfmModel.setTotalPages(lastfmPanel.getTotalPagesString());
-//	 this.lastfmModel.setPageLimit(Integer.parseInt(lastfmPanel
-//	 .getPageLimitString()));
-//	 this.lastfmModel.setApiKey(lastfmPanel.getApiKeyString());
-//	 }
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Select Data")) {

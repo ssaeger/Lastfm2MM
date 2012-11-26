@@ -27,7 +27,8 @@ public class MainFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame(MMPanel mmPanel, LastfmPanel lastfmPanel) {
+	public MainFrame(MMPanel mmPanel, LastfmPanel lastfmPanel,
+			ControlPanel controlPanel) {
 
 		createJFrame();
 
@@ -35,7 +36,7 @@ public class MainFrame {
 		this.mmPanel = mmPanel;
 		dataPanel = new DataPanel();
 		statusPanel = new StatusPanel();
-		controlPanel = new ControlPanel();
+		this.controlPanel = controlPanel;
 
 		insertPanels();
 	}

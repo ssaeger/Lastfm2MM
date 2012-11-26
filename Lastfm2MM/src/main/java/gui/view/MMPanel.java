@@ -1,6 +1,5 @@
 package gui.view;
 
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -70,10 +69,6 @@ public class MMPanel extends JPanel implements Observer {
 		this.txtPath.setText(path);
 	}
 
-	public void setSelectDatabaseListener(ActionListener aListener) {
-		this.btnSelectDatabase.addActionListener(aListener);
-	}
-
 	@Override
 	public void update(Observable o, Object arg) {
 		if (model == o) {
@@ -81,6 +76,5 @@ public class MMPanel extends JPanel implements Observer {
 				txtPath.setText(model.getDatabasePath());
 			}
 		}
-
 	}
 }

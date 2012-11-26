@@ -151,7 +151,7 @@ public class LastfmPanel extends JPanel implements Observer {
 
 		initModel();
 	}
-	
+
 	private void initModel() {
 		model.setUsername(getUsernameString());
 		model.setTotalPages(getTotalPagesString());
@@ -177,26 +177,6 @@ public class LastfmPanel extends JPanel implements Observer {
 
 	public String getDataPathString() {
 		return txtDataPath.getText();
-	}
-
-	public void dataPathChanged(String newDataPath) {
-		txtDataPath.setText(newDataPath);
-	}
-
-	public void usernameChanged(String newUsername) {
-		txtUsername.setText(newUsername);
-	}
-
-	public void totalPagesChanged(String newTotalPages) {
-		txtTotalPages.setText(newTotalPages);
-	}
-
-	public void pageLimitChanged(String newPagelimit) {
-		txtPageLimit.setText(newPagelimit);
-	}
-
-	public void apiKeyChanged(String newApiKey) {
-		txtApiKey.setText(newApiKey);
 	}
 
 	@Override
